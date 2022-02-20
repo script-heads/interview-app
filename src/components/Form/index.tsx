@@ -1,11 +1,14 @@
 import React, { KeyboardEvent, useState } from "react"
+import { TodoActions } from "../../app/store"
 import "./form.scss"
+
 
 export const TodoForm = () => {
   const [task, setTask] = useState("")
 
   const handleAddTodo = () => {
-    // Исправить добавления задания
+    TodoActions.createTodo(task)
+    setTask("")
   }
 
   const handleKeyUp = (e: KeyboardEvent) => {
