@@ -1,7 +1,8 @@
 import * as React from "react"
-import { Checkbox } from "../Checkbox"
+import { ListRow } from "./components/Row"
 import "./list.scss"
 import { useAppSelector } from "../../app/hooks"
+import { TodoActions } from "../../app/store"
 
 export const TodoList = () => {
   const todos = useAppSelector(state => state.todo.todos)
@@ -11,6 +12,7 @@ export const TodoList = () => {
   }
 
   const toggleCheck = (id: number) => {
+    TodoActions.toggleCheckTodo(id)
     // Исправить завершение задания
   }
 
@@ -26,7 +28,7 @@ export const TodoList = () => {
       {todos.length ? (
         <div className="todo-list-content">
           {todos.map((todoItem) => (
-            <Checkbox
+            <ListRow
               key={todoItem.id}
               text={todoItem.text}
               checked={todoItem.checked}

@@ -1,7 +1,7 @@
 import * as React from "react"
-import "./checkbox.scss"
+import "./row.scss"
 
-type CheckboxTypes = {
+type ListRowProps = {
   onClick: () => void
   checked: boolean
   onDelete: () => void
@@ -9,13 +9,13 @@ type CheckboxTypes = {
   onKeyUp: (e: React.KeyboardEvent<HTMLDivElement>) => void
 }
 
-export const Checkbox = ({ checked, text, onClick, onDelete, onKeyUp }: CheckboxTypes) => (
-  <div className="checkbox">
+export const ListRow = ({ checked, text, onClick, onDelete, onKeyUp }: ListRowProps) => (
+  <div className="row">
     <div
       tabIndex={0}
       role="checkbox"
       aria-checked
-      className="checkbox-content"
+      className="row-content"
       onClick={onClick}
       onKeyUp={onKeyUp}
     >
@@ -23,11 +23,10 @@ export const Checkbox = ({ checked, text, onClick, onDelete, onKeyUp }: Checkbox
         tabIndex={-1}
         type="checkbox"
         checked={checked}
-        onChange={onClick}
       />
-      <span className={checked ? "checkbox-checked" : ""}>{text}</span>
+      <span className={checked ? "row-checked" : ""}>{text}</span>
     </div>
-    <button type="button" className="checkbox-delete" onClick={onDelete}>
+    <button type="button" className="row-delete" onClick={onDelete}>
       x
     </button>
   </div>
