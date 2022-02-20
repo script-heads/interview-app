@@ -6,10 +6,9 @@ type CheckboxTypes = {
   checked: boolean
   onDelete: () => void
   text: string
-  onKeyUp: (e: React.KeyboardEvent<HTMLDivElement>) => void
 }
 
-export const Checkbox = ({ checked, text, onClick, onDelete, onKeyUp }: CheckboxTypes) => (
+export const Checkbox = ({ checked, text, onClick, onDelete }: CheckboxTypes) => (
   <div className="checkbox">
     <div
       tabIndex={0}
@@ -17,13 +16,11 @@ export const Checkbox = ({ checked, text, onClick, onDelete, onKeyUp }: Checkbox
       aria-checked
       className="checkbox-content"
       onClick={onClick}
-      onKeyUp={onKeyUp}
     >
       <input
         tabIndex={-1}
         type="checkbox"
-        checked={checked}
-        onChange={onClick}
+        defaultChecked={checked}
       />
       <span className={checked ? "checkbox-checked" : ""}>{text}</span>
     </div>

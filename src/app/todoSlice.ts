@@ -63,7 +63,12 @@ export const counterSlice = createSlice({
       state.todos = state.todos.filter(todo => todo.id !== action.payload)
     },
     toggleCheckTodo: (state, action: PayloadAction<TodoItem['id']>) => {
-      // Fix me please =\
+      state.todos = state.todos.map((todo) => {
+        if (todo.id === action.payload) {
+          return {...todo, checked: !todo.checked}
+        }
+        return todo
+      })
     },
   },
 })

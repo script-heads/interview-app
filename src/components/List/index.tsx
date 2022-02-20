@@ -2,27 +2,23 @@ import * as React from "react"
 import { Checkbox } from "../Checkbox"
 import "./list.scss"
 import { useAppSelector } from "../../app/hooks"
+import { TodoActions } from "../../app/store"
 
 export const TodoList = () => {
   const todos = useAppSelector(state => state.todo.todos)
+  const completeTodos = todos.filter(todo => todo.checked)
 
   const handleDelete = (id: number) => {
-    // Исправить удаление задания
+    TodoActions.deleteTodo(id)
   }
 
   const toggleCheck = (id: number) => {
-    // Исправить завершение задания
-  }
-
-  const handleKeyUp = (e: React.KeyboardEvent<HTMLDivElement>, id: number) => {
-    if (e.keyCode === 13) {
-      toggleCheck(id)
-    }
+    TodoActions.toggleCheckTodo(id)
   }
 
   return (
     <div className="todo-list">
-      <span className="todo-list-title">Список заданий</span>
+      <span className="todo-list-title">Список заданий {todos.length ? `(${completeTodos.length}/${todos.length})` : ''}</span>
       {todos.length ? (
         <div className="todo-list-content">
           {todos.map((todoItem) => (
@@ -31,7 +27,6 @@ export const TodoList = () => {
               text={todoItem.text}
               checked={todoItem.checked}
               onClick={() => toggleCheck(todoItem.id)}
-              onKeyUp={(e) => handleKeyUp(e, todoItem.id)}
               onDelete={() => handleDelete(todoItem.id)}
             />
           ))}
